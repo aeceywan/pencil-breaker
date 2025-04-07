@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>压力铅笔</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+      padding-top: 100px;
+    }
+    img {
+      width: 150px;
+      transition: transform 0.1s ease;
+    }
+    .counter {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <img id="pencil" src="pencil.png" alt="铅笔" onclick="breakPencil()">
+  <div class="counter">你今天已经断了 <span id="count">0</span> 支铅笔</div>
+
+  <audio id="crackSound" src="crack.mp3"></audio>
+
+  <script>
+    let count = 0;
+    let broken = false;
+
+    function breakPencil() {
+      if (broken) return;
+
+      // 震动（部分浏览器支持）
+      if (navigator.vibrate) navigator.vibrate(100);
+
+      // 播放音效
+      document.getElementById('crackSound').play();
+
+      // 切换图片
+      const pencil = document.getElementById('pencil');
+      pencil.src = "pencil_broken.png";
+      broken = true;
+
+      // 更新计数
+      count++;
+      document.getElementById('count').innerText = count;
+
+      // 0.8 秒后恢复
+      setTimeout(() => {
+        pencil.src = "pencil.png";
+        broken = false;
+      }, 800);
+    }
+  </script>
+
+</body>
+</html>
