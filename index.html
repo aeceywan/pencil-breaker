@@ -1,31 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>压力铅笔</title>
+  <meta charset="UTF-8" />
+  <title>Pencil Breaker</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       text-align: center;
       background-color: #f2f2f2;
-      padding-top: 100px;
+      padding-top: 80px;
     }
+
+    h1 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
     img {
-      width: 150px;
-      transition: transform 0.1s ease;
+      width: 400px;
+      max-width: 90%;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out;
     }
+
+    img:active {
+      transform: scale(0.95);
+    }
+
     .counter {
       margin-top: 20px;
-      font-size: 24px;
+      font-size: 20px;
+      color: #555;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #333;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
     }
   </style>
 </head>
 <body>
 
-  <img id="pencil" src="pencil.png" alt="铅笔" onclick="breakPencil()">
-  <div class="counter">你今天已经断了 <span id="count">0</span> 支铅笔</div>
+  <h1>Snap the Stress Away ✏️</h1>
+  <img id="pencil" src="pencil_400.png" alt="Pencil" onclick="breakPencil()" />
+  <div class="counter">
+    You've snapped <span id="count">0</span> pencil<span id="plural">s</span> today 💥
+  </div>
 
-<audio id="crackSound" src="crack.mp3"></audio>
+  <audio id="crackSound" src="crack.mp3"></audio>
 
   <script>
     let count = 0;
@@ -34,24 +67,25 @@
     function breakPencil() {
       if (broken) return;
 
-      // 震动（部分浏览器支持）
+      // 震动反馈（部分浏览器支持）
       if (navigator.vibrate) navigator.vibrate(100);
 
       // 播放音效
       document.getElementById('crackSound').play();
 
-      // 切换图片
+      // 图片切换为断裂
       const pencil = document.getElementById('pencil');
-      pencil.src = "pencil_broken.png";
+      pencil.src = "pencil_broken_400.png";
       broken = true;
 
       // 更新计数
       count++;
       document.getElementById('count').innerText = count;
+      document.getElementById('plural').innerText = count === 1 ? '' : 's';
 
-      // 0.8 秒后恢复
+      // 恢复原图
       setTimeout(() => {
-        pencil.src = "pencil.png";
+        pencil.src = "pencil_400.png";
         broken = false;
       }, 800);
     }
