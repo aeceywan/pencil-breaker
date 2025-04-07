@@ -61,4 +61,14 @@
 
       count++;
       document.getElementById('count').innerText = count;
-      document.getElementById('plural').innerText = count
+      document.getElementById('plural').innerText = count === 1 ? '' : 's';
+
+      setTimeout(() => {
+        pencil.src = "pencil.png";
+        broken = false;
+      }, 800);
+    }
+  </script>
+
+</body>
+</html>
