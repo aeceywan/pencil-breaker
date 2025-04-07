@@ -33,21 +33,6 @@
       font-size: 20px;
       color: #555;
     }
-
-    button {
-      margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      background-color: #333;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #555;
-    }
   </style>
 </head>
 <body>
@@ -67,29 +52,13 @@
     function breakPencil() {
       if (broken) return;
 
-      // 震动反馈（部分浏览器支持）
       if (navigator.vibrate) navigator.vibrate(100);
-
-      // 播放音效
       document.getElementById('crackSound').play();
 
-      // 图片切换为断裂
       const pencil = document.getElementById('pencil');
-      pencil.src = "pencil_broken_400.png";
+      pencil.src = "pencil_broken.png";
       broken = true;
 
-      // 更新计数
       count++;
       document.getElementById('count').innerText = count;
-      document.getElementById('plural').innerText = count === 1 ? '' : 's';
-
-      // 恢复原图
-      setTimeout(() => {
-        pencil.src = "pencil.png";
-        broken = false;
-      }, 800);
-    }
-  </script>
-
-</body>
-</html>
+      document.getElementById('plural').innerText = count
