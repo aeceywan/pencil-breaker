@@ -1,37 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Pencil Breaker</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: sans-serif;
       text-align: center;
-      background-color: #f2f2f2;
-      padding-top: 80px;
+      background-color: #f9f9f9;
+      padding-top: 100px;
     }
-
-    h1 {
-      font-size: 28px;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
     img {
       width: 400px;
       max-width: 90%;
       cursor: pointer;
-      transition: transform 0.1s ease-in-out;
+      transition: transform 0.1s ease;
     }
-
-    img:active {
-      transform: scale(0.95);
-    }
-
     .counter {
       margin-top: 20px;
-      font-size: 20px;
-      color: #555;
+      font-size: 22px;
     }
   </style>
 </head>
@@ -43,7 +30,7 @@
     You've snapped <span id="count">0</span> pencil<span id="plural">s</span> today 💥
   </div>
 
-  <audio id="crackSound" src="crack.mp3"></audio>
+  <audio id="crackSound" src="crack.mp3" preload="auto"></audio>
 
   <script>
     let count = 0;
@@ -52,17 +39,24 @@
     function breakPencil() {
       if (broken) return;
 
+      // 振动（部分浏览器有效）
       if (navigator.vibrate) navigator.vibrate(100);
-      document.getElementById('crackSound').play();
 
+      // 播放音效（可先注释调试）
+      const sound = document.getElementById('crackSound');
+      if (sound) sound.play();
+
+      // 替换图片
       const pencil = document.getElementById('pencil');
       pencil.src = "pencil_broken.png";
       broken = true;
 
+      // 更新计数
       count++;
       document.getElementById('count').innerText = count;
       document.getElementById('plural').innerText = count === 1 ? '' : 's';
 
+      // 恢复原图
       setTimeout(() => {
         pencil.src = "pencil.png";
         broken = false;
