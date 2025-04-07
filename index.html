@@ -53,7 +53,7 @@
 <body>
 
   <h1>Snap the Stress Away ✏️</h1>
-  <img id="pencil" src="pencil_400.png" alt="Pencil" onclick="breakPencil()" />
+  <img id="pencil" src="pencil.png" alt="Pencil" onclick="breakPencil()" />
   <div class="counter">
     You've snapped <span id="count">0</span> pencil<span id="plural">s</span> today 💥
   </div>
@@ -85,7 +85,7 @@
 
       // 恢复原图
       setTimeout(() => {
-        pencil.src = "pencil_400.png";
+        pencil.src = "pencil.png";
         broken = false;
       }, 800);
     }
